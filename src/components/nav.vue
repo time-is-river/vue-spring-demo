@@ -7,15 +7,15 @@
       :router="true">
       <el-menu-item index="/page3">
         <i class="el-icon-menu"></i>
-        <span slot="title">价格每日更新商品信息</span>
+        <span slot="title">价格每日更新商品信息管理</span>
       </el-menu-item>
       <el-menu-item index="/page2">
         <i class="el-icon-setting"></i>
-        <span slot="title">导航2</span>
+        <span slot="title">条码商品信息管理</span>
       </el-menu-item>
       <el-menu-item index="/page1">
         <i class="el-icon-menu"></i>
-        <span slot="title">导航1</span>
+        <span slot="title">商品结算管理页面</span>
       </el-menu-item>
     </el-menu>
 </template>

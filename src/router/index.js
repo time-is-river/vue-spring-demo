@@ -4,7 +4,7 @@ import Router from 'vue-router'
 // 加载组件，如果需要懒加载请参阅文档
 import login from '../pages/login.vue'
 import page1 from '../pages/page1.vue'
-import page2 from '../pages/page2.vue'
+import page2 from '../pages/commodityInformation/commodityHaveBarCode/index.vue'
 import page3 from '../pages/commodityInformation/commodityNoBarcode/index.vue'
 
 Vue.use(Router)

@@ -131,7 +131,6 @@
       }
     },
     created: function () {
-      debugger
       this.loadCommodityInformation()
     },
     methods: {
@@ -156,7 +155,6 @@
         this.loadCommodityInformation()
       },
       handleEdit (index, row) {
-        debugger
         this.editForm = row
         this.$refs['editDialog'].handleEdit(this.editForm)
         this.dialogVisible = true
@@ -165,7 +163,6 @@
         try {
           await this.$confirm(`确认删除商品 ${row.name}?`, '确认删除')
           const res = await commodity.remove({ id: row.id })
-          debugger
           if (res.success) {
             this.$emit('success', true)
             this.loadCommodityInformation()
@@ -177,7 +174,6 @@
         }
       },
       async loadCommodityInformation () {
-        debugger
         this.loading = false
         const res = await commodity.pageQuery(this.page.current, this.page.size, this.searchForm)
         debugger
@@ -189,7 +185,6 @@
         this.loading = false
       },
       handleEditSuccess () {
-        debugger
         this.loadCommodityInformation()
       }
     }

@@ -17,8 +17,14 @@ export default {
       data: params
     })
   },
-  save (params) {
+  queryByBarcode (borcade) {
     debugger
+    return request({
+      url: '/commodity/queryByBarcode?barcode=' + borcade,
+      method: 'get'
+    })
+  },
+  save (params) {
     return request({
       url: '/commodity/saveOrUpdate',
       method: 'post',

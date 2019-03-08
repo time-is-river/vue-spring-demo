@@ -46,7 +46,6 @@
         } else {
           this.$store.commit('userStatus', null)
         }
-        debugger
         return this.$store.getters.isLogin
       }
     }

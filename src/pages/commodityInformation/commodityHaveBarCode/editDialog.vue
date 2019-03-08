@@ -5,6 +5,11 @@
     @close="handleCancel"
     width="40%">
     <el-form label-width="100px" ref="commodityForm" label-position="left" :model="commodityForm" :rules="formRule">
+      <el-form-item label="商品条码" prop="barcode">
+        <el-col :span="18">
+          <el-input v-model="commodityForm.barcode" ></el-input>
+        </el-col>
+      </el-form-item>
       <el-form-item label="商品名称" prop="name">
         <el-col :span="18">
           <el-input v-model="commodityForm.name"></el-input>
@@ -54,6 +59,7 @@
         return {
           visible: this.show,
           commodityForm: {
+            barcode: '',
             name: '',
             price: '',
             spec: '',
@@ -61,6 +67,7 @@
           },
           editData: [],
           formRule: {
+            barcode: [{ required: true, message: '请填写商品条码', trigger: 'blur' }],
             name: [{ required: true, message: '请填写商品名称', trigger: 'blur' }],
             price: [{ required: true, message: '请填写商品价格', trigger: 'blur' }],
             spec: [{ required: true, message: '请填写商品规格', trigger: 'blur' }]
@@ -85,7 +92,6 @@
             if (valid) {
               const postForm = JSON.parse(JSON.stringify(this.commodityForm))
               commodity.save(postForm).then(response => {
-                debugger
                 if (response.success) {
                   this.$emit('success', response)
                   this.visible = false

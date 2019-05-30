@@ -11,5 +11,7 @@
 ```
 npm install
 npm run dev
+打包
+npm run build
 ```
 访问localhost:8080,服务器指定端口为localhost:8888

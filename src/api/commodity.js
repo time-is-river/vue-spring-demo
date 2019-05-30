@@ -18,7 +18,6 @@ export default {
     })
   },
   queryByBarcode (borcade) {
-    debugger
     return request({
       url: '/commodity/queryByBarcode?barcode=' + borcade,
       method: 'get'

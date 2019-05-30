@@ -85,7 +85,6 @@
             if (valid) {
               const postForm = JSON.parse(JSON.stringify(this.commodityForm))
               commodity.save(postForm).then(response => {
-                debugger
                 if (response.success) {
                   this.$emit('success', response)
                   this.visible = false

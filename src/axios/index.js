@@ -2,12 +2,15 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 
 // axios 配置
-axios.defaults.timeout = 3000 // 设置超时时间为3s
+axios.defaults.timeout = 8000 // 设置超时时间为8s
 // 配置axios发送请求时携带cookie
 axios.defaults.withCredentials = true
 // 如果为开发环境，将baseURL设置为服务器地址
+// axios.defaults.baseURL = 'http://localhost:8888'
 if (process.env.NODE_ENV === 'development') {
   axios.defaults.baseURL = 'http://localhost:8888'
+} else {
+  axios.defaults.baseURL = 'http://chenxx.club/api'
 }
 
 // 设置content-type
@@ -33,13 +36,17 @@ axios.interceptors.request.use(
 )
 
 axios.interceptors.response.use(response => {
-  const res = response.data
-  if (res.code !== 200) {
-    Message({
-      message: res.message,
-      type: 'error',
-      duration: 5 * 1000
-    })
+  if (response.config.responseType !== 'arraybuffer') {
+    const res = response.data
+    if (res.code !== 200 && res.code !== 400) {
+      Message({
+        message: res.message,
+        type: 'error',
+        duration: 5 * 1000
+      })
+    } else {
+      return response.data
+    }
   } else {
     return response.data
   }

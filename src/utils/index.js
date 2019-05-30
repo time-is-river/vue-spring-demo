@@ -133,3 +133,7 @@ export function formatAddress (address) {
   }
   return result
 }
+export function randomNumeric (length) {
+  let start = Math.pow(10, length - 1)
+  return Math.floor(start + Math.random() * 9 * start)
+}

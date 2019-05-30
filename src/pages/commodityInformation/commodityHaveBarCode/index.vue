@@ -176,7 +176,6 @@
         try {
           await this.$confirm(`确认删除商品 ${row.name}?`, '确认删除')
           const res = await commodity.remove({ id: row.id })
-          debugger
           if (res.success) {
             this.$emit('success', true)
             this.loadCommodityInformation()
@@ -189,7 +188,6 @@
       },
       async queryCommodityByBarcode () {
         await commodity.queryByBarcode('6907992512570').then(res => {
-          debugger
           if (res.success) {
             this.editForm = res.data
           } else {

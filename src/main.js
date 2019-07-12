@@ -21,7 +21,6 @@ import axios from './axios'
 import {getToken} from './utils/auth'
 
 router.beforeEach((to, from, next) => {
-  debugger
   let token = getToken()
   if (JSON.parse(localStorage.isLogin)) {
     if (token !== null && token !== '') {

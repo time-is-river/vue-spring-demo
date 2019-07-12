@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <p>Welcome to Sys</p>
+    <p>welcome to HX supermarket</p>
     <p>{{msg}}</p>
     <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="80px">
       <el-form-item label="账号" prop="userName">
@@ -104,7 +104,6 @@
           postForm.key = this.identifyCode
           login.login(postForm).then(response => {
             if (response.code === 200) {
-              debugger
               /**
                * 将用户信息保存到localStorage中
 

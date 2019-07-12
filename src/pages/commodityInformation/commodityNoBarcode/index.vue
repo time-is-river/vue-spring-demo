@@ -179,14 +179,11 @@
         }
       },
       async loadCommodityInformation () {
-        debugger
         this.loading = false
         const res = await commodity.pageQuery(this.page.current, this.page.size, this.searchForm)
-        debugger
         this.page.total = res.data.total
         res.data.list.forEach(element => {
           element.showOperate = false
-          debugger
           element.createDate = getDate(element.createDate, 'yyyy-MM-dd hh:mm:ss')
         })
         this.tableData = res.data.list

@@ -1,6 +1,5 @@
 
 export const userStatus = (state, userName) => {
-  debugger
   /**
    * 更改用户状态
    */

@@ -198,9 +198,7 @@
         }
       },
       async queryCommodityByBarcode () {
-        debugger
         await commodity.queryByBarcode(this.searchForm.barcode).then(res => {
-          debugger
           if (res.success && res.data.id != null) {
             this.editForm = res.data
           } else {
@@ -221,7 +219,6 @@
           element.createDate = getDate(element.createDate, 'yyyy-MM-dd hh:mm:ss')
         })
         this.tableData = res.data.list
-        debugger
         this.loading = false
         if (this.page.total === 0) {
           this.$confirm('该商品不存在,是否新增?', '提示', {

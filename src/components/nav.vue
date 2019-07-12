@@ -7,7 +7,7 @@
       :router="true">
       <el-menu-item index="/page3">
         <i class="el-icon-menu"></i>
-        <span slot="title">价格每日更新商品信息管理</span>
+        <span slot="title">蔬菜、瓜果、生鲜信息</span>
       </el-menu-item>
       <el-menu-item index="/page2">
         <i class="el-icon-setting"></i>

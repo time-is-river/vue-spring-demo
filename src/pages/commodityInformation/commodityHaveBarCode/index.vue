@@ -20,7 +20,7 @@
         <el-form-item class="operate">
           <el-button @click="">重置</el-button>
           <el-button @click="loadCommodityInformation">搜索</el-button>
-          <el-button @click="dialogVisible = true" plain>新增条码商品</el-button>
+          <el-button @click="handleCreate" >新增条码商品</el-button>
         </el-form-item>
       </el-form>
       <el-table
@@ -45,7 +45,12 @@
         </el-table-column>
         <el-table-column
           prop="price"
-          label="商品价格"
+          label="进货价格"
+          width="100">
+        </el-table-column>
+        <el-table-column
+          prop="salePrice"
+          label="零售价格"
           width="100">
         </el-table-column>
         <el-table-column
@@ -103,6 +108,7 @@
 <script>
   import commodity from '@/api/commodity'
   import editDialog from './editDialog'
+  import { getDate } from '../../../utils/common'
 
   export default {
     components: { editDialog },
@@ -128,6 +134,7 @@
         editForm: {
           barcode: '',
           name: '',
+          salePrice: '',
           price: '',
           spec: '',
           remark: ''
@@ -167,6 +174,10 @@
       handlePageChange () {
         this.loadCommodityInformation()
       },
+      handleCreate () {
+        this.dialogVisible = true
+        this.$refs['editDialog'].createStatus = false
+      },
       handleEdit (index, row) {
         this.editForm = row
         this.$refs['editDialog'].handleEdit(this.editForm)
@@ -187,8 +198,10 @@
         }
       },
       async queryCommodityByBarcode () {
-        await commodity.queryByBarcode('6907992512570').then(res => {
-          if (res.success) {
+        debugger
+        await commodity.queryByBarcode(this.searchForm.barcode).then(res => {
+          debugger
+          if (res.success && res.data.id != null) {
             this.editForm = res.data
           } else {
             this.editForm = this.searchForm
@@ -205,8 +218,10 @@
         this.page.total = res.data.total
         res.data.list.forEach(element => {
           element.showOperate = false
+          element.createDate = getDate(element.createDate, 'yyyy-MM-dd hh:mm:ss')
         })
         this.tableData = res.data.list
+        debugger
         this.loading = false
         if (this.page.total === 0) {
           this.$confirm('该商品不存在,是否新增?', '提示', {

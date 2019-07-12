@@ -17,7 +17,7 @@
         <el-form-item class="operate">
           <el-button @click="">重置</el-button>
           <el-button @click="loadCommodityInformation">搜索</el-button>
-          <el-button @click="dialogVisible = true" plain>新增</el-button>
+          <el-button @click="handleCreate">新增</el-button>
         </el-form-item>
       </el-form>
       <el-table
@@ -93,8 +93,9 @@
 </template>
 
 <script>
-  import commodity from '@/api/commodity'
+  import commodity from '../../../api/commodity'
   import editDialog from './editDialog'
+  import { getDate } from '../../../utils/common'
 
   export default {
     components: { editDialog },
@@ -154,6 +155,10 @@
       handlePageChange () {
         this.loadCommodityInformation()
       },
+      handleCreate () {
+        this.dialogVisible = true
+        this.$refs['editDialog'].createStatus = false
+      },
       handleEdit (index, row) {
         this.editForm = row
         this.$refs['editDialog'].handleEdit(this.editForm)
@@ -174,11 +179,15 @@
         }
       },
       async loadCommodityInformation () {
+        debugger
         this.loading = false
         const res = await commodity.pageQuery(this.page.current, this.page.size, this.searchForm)
+        debugger
         this.page.total = res.data.total
         res.data.list.forEach(element => {
           element.showOperate = false
+          debugger
+          element.createDate = getDate(element.createDate, 'yyyy-MM-dd hh:mm:ss')
         })
         this.tableData = res.data.list
         this.loading = false

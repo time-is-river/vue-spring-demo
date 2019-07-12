@@ -59,6 +59,7 @@
             spec: '',
             remark: ''
           },
+          createStatus: false,
           editData: [],
           formRule: {
             name: [{ required: true, message: '请填写商品名称', trigger: 'blur' }],
@@ -77,6 +78,7 @@
         },
         handleEdit (value) {
           this.editData = value
+          this.createStatus = true
           this.commodityForm = JSON.parse(JSON.stringify(value))
         },
         handleConfirm () {
@@ -84,6 +86,10 @@
             let valid = this.$refs['commodityForm'].validate()
             if (valid) {
               const postForm = JSON.parse(JSON.stringify(this.commodityForm))
+              delete postForm.createDate
+              if (!this.createStatus) {
+                delete postForm.id
+              }
               commodity.save(postForm).then(response => {
                 if (response.success) {
                   this.$emit('success', response)

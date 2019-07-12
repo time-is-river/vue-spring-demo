@@ -17,9 +17,14 @@ import store from './store/index'
 // 引入ajax框架axios配置
 import axios from './axios'
 
+// 获取token
+import {getToken} from './utils/auth'
+
 router.beforeEach((to, from, next) => {
-  if (to.meta.isLogin) {
-    if (sessionStorage.isLogin) {
+  debugger
+  let token = getToken()
+  if (JSON.parse(localStorage.isLogin)) {
+    if (token !== null && token !== '') {
       next()
     } else {
       next({
@@ -52,5 +57,5 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: {App}
 })

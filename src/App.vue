@@ -9,7 +9,7 @@
       </el-header>
       <el-container>
         <!-- 导航组件 -->
-        <el-aside width="220px">
+        <el-aside width="230px">
           <Nav></Nav>
         </el-aside>
         <el-main>
@@ -41,12 +41,12 @@
         /**
          * 读取全局状态，获取用户是否登陆，决定渲染状态
          */
-        if (sessionStorage.getItem('isLogin')) {
-          this.$store.commit('userStatus', JSON.parse(sessionStorage.getItem('currentUser')))
+        if (JSON.parse(localStorage.getItem('isLogin'))) {
+          this.$store.commit('userStatus', localStorage.getItem('userName'))
         } else {
           this.$store.commit('userStatus', null)
         }
-        return this.$store.getters.isLogin
+        return JSON.parse(localStorage.getItem('isLogin'))
       }
     }
   }

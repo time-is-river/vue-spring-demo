@@ -15,9 +15,14 @@
           <el-input v-model="commodityForm.name"></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="商品价格" prop="price">
+      <el-form-item label="进货价格" prop="price">
         <el-col :span="18">
           <el-input v-model="commodityForm.price"></el-input>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="零售价格" prop="salePrice">
+        <el-col :span="18">
+          <el-input v-model="commodityForm.salePrice"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="商品规格" prop="spec">
@@ -62,14 +67,17 @@
             barcode: '',
             name: '',
             price: '',
+            salePrice: '',
             spec: '',
             remark: ''
           },
+          editStatus: false,
           editData: [],
           formRule: {
             barcode: [{ required: true, message: '请填写商品条码', trigger: 'blur' }],
             name: [{ required: true, message: '请填写商品名称', trigger: 'blur' }],
-            price: [{ required: true, message: '请填写商品价格', trigger: 'blur' }],
+            price: [{ required: true, message: '请填写商品进货价格', trigger: 'blur' }],
+            salePrice: [{ required: true, message: '请填写商品零售价格', trigger: 'blur' }],
             spec: [{ required: true, message: '请填写商品规格', trigger: 'blur' }]
           }
         }
@@ -80,17 +88,24 @@
           this.$refs['commodityForm'].resetFields()
           Object.assign(this.commodityForm, this.$options.data().commodityForm)
           this.visible = false
+          this.editStatus = false
           this.$emit('update:show', false)
         },
         handleEdit (value) {
           this.editData = value
           this.commodityForm = JSON.parse(JSON.stringify(value))
+          this.editStatus = true
         },
         handleConfirm () {
           try {
             let valid = this.$refs['commodityForm'].validate()
             if (valid) {
+              debugger
               const postForm = JSON.parse(JSON.stringify(this.commodityForm))
+              delete postForm.createDate
+              if (!this.editStatus) {
+                delete postForm.id
+              }
               commodity.save(postForm).then(response => {
                 if (response.success) {
                   this.$emit('success', response)

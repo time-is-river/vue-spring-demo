@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import axiox from 'axios'
 
 export default {
   pageQuery (page, size, params) {
@@ -11,30 +11,42 @@ export default {
         size: size
       }
     }
-    return request({
+    return axiox.post('/commodity/list', JSON.stringify(params))
+    /**
+     * return request({
       url: '/commodity/list',
       method: 'post',
       data: params
     })
+     */
   },
   queryByBarcode (borcade) {
-    return request({
+    return axiox.get('/commodity/queryByBarcode?barcode=' + borcade)
+    /**
+     * return request({
       url: '/commodity/queryByBarcode?barcode=' + borcade,
       method: 'get'
     })
+     */
   },
   save (params) {
-    return request({
+    return axiox.post('/commodity/saveOrUpdate', params)
+    /**
+     * return request({
       url: '/commodity/saveOrUpdate',
       method: 'post',
       data: params
     })
+     */
   },
   remove (params) {
-    return request({
-      url: '/commodity',
-      method: 'delete',
-      params: params
-    })
+    return axiox.delete('/commodity', params)
+    /**
+     *  return request({
+       url: '/commodity',
+       method: 'delete',
+       params: params
+     })
+     */
   }
 }

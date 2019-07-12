@@ -35,6 +35,7 @@
   import captcha from '@/api/captcha'
   import router from '@/router/index'
   import { randomNumeric } from '@/utils'
+  import { setToken } from '../utils/auth'
 
   export default {
     name: 'home',
@@ -78,7 +79,7 @@
     },
     methods: {
       // 从store.actions中引入方法
-      ...mapActions(['logIn', 'loginSuccess']),
+      ...mapActions(['logIn', 'loginSuccess', 'setUser']),
       async makeCode () {
         this.identifyCode = randomNumeric(4)
         this.captchaImage = await captcha.getCaptcha(this.identifyCode)
@@ -91,22 +92,32 @@
             return false
           }
           // 开个超级用户免密登陆
+          /**
           if (this.loginForm.name === 'superAdmin') {
             this.logIn({name: 'superAdmin'})
             this.loginSuccess()
             return
           }
+           */
           this.onLogging = true
           const postForm = JSON.parse(JSON.stringify(this.loginForm))
           postForm.key = this.identifyCode
           login.login(postForm).then(response => {
             if (response.code === 200) {
+              debugger
               /**
-               * 将用户信息保存到sessionStorage中
+               * 将用户信息保存到localStorage中
+
+              //localStorage.setItem('username', response.data.user.name)
+              //localStorage.setItem('currentUser', JSON.stringify(response.data.user))
                */
-              sessionStorage.setItem('username', response.data.user.name)
-              sessionStorage.setItem('currentUser', JSON.stringify(response.data.user))
-              sessionStorage.setItem('isLogin', true)
+
+              /**
+               * 保存 token
+               */
+              setToken(response.data)
+              this.setUser(response.data.userName)
+
               /**
                * 将用户信息放入vuex
                */

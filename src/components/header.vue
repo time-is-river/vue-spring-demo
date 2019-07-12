@@ -4,7 +4,7 @@
       <!-- 通过$store.state.user 可以获得登陆时记录的用户 -->
       <el-row>
         <el-col :span="6" :offset="18">
-          <el-button type="success" class="userIcon">{{$store.state.currentUser.name}}</el-button>
+          <el-button type="success" class="userIcon">{{$store.state.userName}}</el-button>
           <el-button type="primary" @click="onLogout" round class="signout">注销</el-button>
         </el-col>
       </el-row>
@@ -14,13 +14,16 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import { removeToken } from '../utils/auth'
 
   export default {
     methods: {
       // 从store.actions中引入方法
       ...mapActions(['setUser']),
       onLogout: function () {
+        removeToken()
         this.setUser(null)
+        location.reload()
       }
     }
   }

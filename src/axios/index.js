@@ -76,7 +76,6 @@ axios.interceptors.response.use(response => {
         }, 2500)
         break
       default: error.message = '请求出错:' + error.response.status
-        location.reload()
     }
   }
   Message({

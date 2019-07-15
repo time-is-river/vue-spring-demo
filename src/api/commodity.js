@@ -30,7 +30,7 @@ export default {
      */
   },
   save (params) {
-    return axiox.post('/commodity/saveOrUpdate', params)
+    return axiox.post('/commodity/saveOrUpdate', JSON.stringify(params))
     /**
      * return request({
       url: '/commodity/saveOrUpdate',
@@ -39,8 +39,8 @@ export default {
     })
      */
   },
-  remove (params) {
-    return axiox.delete('/commodity', params)
+  remove (id) {
+    return axiox.delete('/commodity?id=' + id)
     /**
      *  return request({
        url: '/commodity',

@@ -100,7 +100,6 @@
           try {
             let valid = this.$refs['commodityForm'].validate()
             if (valid) {
-              debugger
               const postForm = JSON.parse(JSON.stringify(this.commodityForm))
               delete postForm.createDate
               if (!this.editStatus) {

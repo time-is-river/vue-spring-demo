@@ -186,7 +186,7 @@
       async handleDelete (index, row) {
         try {
           await this.$confirm(`确认删除商品 ${row.name}?`, '确认删除')
-          const res = await commodity.remove({ id: row.id })
+          const res = await commodity.remove(row.id)
           if (res.success) {
             this.$emit('success', true)
             this.loadCommodityInformation()

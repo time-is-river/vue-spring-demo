@@ -5,15 +5,15 @@
       @open="handleOpen"
       @close="handleClose"
       :router="true">
-      <el-menu-item index="/page3">
+      <el-menu-item index="/page3" style="text-align: left">
         <i class="el-icon-menu"></i>
-        <span slot="title">蔬菜、瓜果、生鲜信息</span>
+        <span slot="title">生鲜信息</span>
       </el-menu-item>
-      <el-menu-item index="/page2">
+      <el-menu-item index="/page2" style="text-align: left">
         <i class="el-icon-setting"></i>
         <span slot="title">条码商品信息管理</span>
       </el-menu-item>
-      <el-menu-item index="/page1">
+      <el-menu-item index="/page1" style="text-align: left">
         <i class="el-icon-menu"></i>
         <span slot="title">商品结算管理页面</span>
       </el-menu-item>

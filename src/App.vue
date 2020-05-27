@@ -2,7 +2,7 @@
   <!-- 这里的Html写的比较丑，是(技术有限)为了布局结构更清晰一些 -->
   <div id="app">
     <!-- element的布局 v-if:根据返回值决定是否渲染  -->
-    <el-container v-if="isLogin" class="main-container" >
+    <el-container v-if="isLogin">
       <el-header class="header">
         <!-- header组件 -->
         <Header></Header>

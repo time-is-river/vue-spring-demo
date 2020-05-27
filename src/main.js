@@ -11,6 +11,9 @@ import ElementUI from 'element-ui'
 // css文件需手动引入
 import 'element-ui/lib/theme-chalk/index.css'
 
+// svg
+import '@/utils/svgConfig'
+
 // 引入vuex配置文件
 import store from './store/index'
 
